@@ -1,21 +1,22 @@
+import { useQuery } from "react-query";
 import { Metric } from "../../components/metric/metric";
+import { summaryData } from "../../mock/api";
 
 export const Home = () => {
+  const query = useQuery("summary", summaryData);
+  if (!query.data) {
+    return <>Loading...</>;
+  }
   return (
     <>
       <div>
-        <img src="/samplecam.jpeg" alt="lizard photo"></img>
+        <img src={query.data.imageUrl} alt="lizard photo"></img>
 
         <div className="flex flex-wrap mt-2 mx-2">
-          <Metric label="humidity">123 Units</Metric>
-          <Metric label="temperature">40 degrees</Metric>
-          <Metric label="uv level">700 Units</Metric>
+          <Metric label="humidity">{query.data.humidity}%</Metric>
+          <Metric label="temperature">{query.data.temperature}°C</Metric>
+          <Metric label="uv level">{query.data.uvLevel} units</Metric>
         </div>
-
-        <img src="/samplecam.jpeg" alt="lizard photo"></img>
-        <img src="/samplecam.jpeg" alt="lizard photo"></img>
-        <img src="/samplecam.jpeg" alt="lizard photo"></img>
-        <img src="/samplecam.jpeg" alt="lizard photo"></img>
       </div>
     </>
   );
