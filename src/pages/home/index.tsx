@@ -10,7 +10,7 @@ export const Home = () => {
   return (
     <>
       <div>
-        <img src={query.data.imageUrl} alt="lizard photo"></img>
+        <img src={query.data.imageUrl} alt="lizard"></img>
 
         <div className="flex flex-wrap mt-2 mx-2">
           <Metric label="humidity">{query.data.humidity}%</Metric>
