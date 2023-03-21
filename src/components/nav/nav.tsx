@@ -1,3 +1,5 @@
+import { useRoutes } from "react-router-dom";
+
 export const Nav = () => {
   const navItems = [
     {
@@ -62,11 +64,24 @@ export const Nav = () => {
     },
   ];
 
+  // const route = useRoute
+  // console.log(window.location.pathname);
+  const selected = navItems.findIndex(
+    (el) => el.url === window.location.pathname
+  );
+
   return (
     <div className="flex justify-around fixed bottom-0 w-full bg-white bg-opacity-70 backdrop-blur-md h-16">
       {navItems.map((item, i) => (
-        <a key={i} href={item.url} className="pt-5 pb-2 px-8">
+        <a
+          key={i}
+          href={item.url}
+          className={`pt-5 pb-2 px-8  ${
+            i === selected ? "border-b-4 border-gray-400" : ""
+          }`}
+        >
           {item.icon}
+
           {/* {item.label} */}
         </a>
       ))}
