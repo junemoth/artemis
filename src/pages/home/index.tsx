@@ -4,18 +4,29 @@ import { summaryData } from "../../mock/api";
 
 export const Home = () => {
   const query = useQuery("summary", summaryData);
-  if (!query.data) {
-    return <>Loading...</>;
-  }
+
   return (
     <>
       <div>
-        <img src={query.data.imageUrl} alt="lizard"></img>
+        {query.data ? (
+          <img src={query.data.imageUrl} alt="lizard"></img>
+        ) : (
+          <div
+            style={{ width: "100vw", height: "75vw" }}
+            className="w-full bg-gray-300 animate-pulse"
+          ></div>
+        )}
 
         <div className="flex flex-wrap mt-2 mx-2">
-          <Metric label="humidity">{query.data.humidity}%</Metric>
-          <Metric label="temperature">{query.data.temperature}°C</Metric>
-          <Metric label="uv level">{query.data.uvLevel} units</Metric>
+          <Metric label="humidity">
+            {query.data ? `${query.data.humidity} %` : undefined}
+          </Metric>
+          <Metric label="temperature">
+            {query.data ? `${query.data.temperature} °C` : undefined}
+          </Metric>
+          <Metric label="uv level">
+            {query.data ? `${query.data.uvLevel} units` : undefined}
+          </Metric>
         </div>
       </div>
     </>
